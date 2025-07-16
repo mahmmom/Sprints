@@ -1,5 +1,22 @@
 import random
 
+def random_greetings():
+    random_list = [
+        "Hello! How can I help you today?",
+        "Hi there! What can I get for you?",
+        "Good day! What's on your mind?",
+        "Hey! How can I assist you today?",
+        "Good to see you again! What can I get for you?",
+        "Welcome back! What's on your mind?",
+        "Hi there! What can I get for you?",
+        "Good day! What's on your mind?",
+        "Hey! How can I assist you today?",
+    ]
+
+    list_count = len(random_list)
+    random_item = random.randrange(list_count)
+
+    return random_list[random_item]
 
 def random_string():
     random_list = [

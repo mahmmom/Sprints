@@ -39,15 +39,13 @@ class ResearchAgent():
         for day in self.data["opening_hours"]:
             if re.search(day, user_input, re.IGNORECASE):
                 return f"Our hours on {day} are: {self.data['opening_hours'][day]}"
-        return "We’re open every day! Want to ask about a specific day?"
-    
-
+        return "We're open every day! Want to ask about a specific day?"
     
 
 agent = ResearchAgent()
 
-print(agent.get_price("Mocha Caramel Latte price?"))
-print(agent.get_ingredients("What are the ingredients in Caramel Latte?"))
-print(agent.get_hours("What are your hours on Saturday?"))  
-print(agent.list_drinks())
+# print(agent.get_price("Mocha Caramel Latte price?"))
+# print(agent.get_ingredients("What are the ingredients in Caramel Latte?"))
+# print(agent.get_hours("What are your hours on Saturday?"))  
+# print(agent.list_drinks())
 

@@ -1,6 +1,6 @@
 import re
 from ResearchAgent import ResearchAgent
-from random_responses import random_string
+from random_responses import random_string, random_greetings
 
 class ChatBotAgent:
     def __init__(self):
@@ -9,25 +9,26 @@ class ChatBotAgent:
         
     def greet_user(self):
         """Display welcome message and available help options"""
-        print("=" * 50)
+        print("=" * 55)
         print("🍵 Welcome to SmartCafe Assistant! 🍵")
-        print("=" * 50)
+        print("=" * 55)
         print("I'm here to help you with information about our cafe!")
         print("\nYou can ask me about:")
-        print("- Menu items and ingredients")
-        print("- Prices of drinks")
-        print("- Nutritional information")
-        print("- Our opening hours")
-        print("- Available drinks")
+        print("🍽- Menu items and ingredients")
+        print("💰- Prices of drinks")
+        print("🥗- Nutritional information")
+        print("🕒- Our opening hours")
+        print("🥤- Available drinks")
         print("\nType 'exit' or 'quit' to end the conversation.")
-        print("-" * 50)
+        print("=" * 55)
     
     def detect_intent(self, user_input):
         """Use regex to detect user intent and route to appropriate response"""
         user_input_lower = user_input.lower()
         
         # Intent patterns using regex
-        price_patterns = [r'\b(price|cost|how much|expensive)\b', r'\$']
+        greeting_patterns = [r'\b(hello|hi|hey|greetings|how are you|how are you doing)\b']
+        price_patterns = [r'\b(price|cost|how much|expensive|amount|fee|pay)\b', r'\$']
         ingredient_patterns = [r'\b(ingredient|made of|contains|what.*in)\b']
         nutrition_patterns = [r'\b(calorie|nutrition|sugar|healthy|fat)\b']
         hours_patterns = [r'\b(hour|open|close|time|when)\b']
@@ -37,6 +38,7 @@ class ChatBotAgent:
         if re.search(r'\b(exit|quit|bye|goodbye)\b', user_input_lower):
             return 'exit'
         
+        # Need  to change this whole implementation
         # Check each intent pattern
         if any(re.search(pattern, user_input_lower) for pattern in price_patterns):
             return 'price'
@@ -48,6 +50,8 @@ class ChatBotAgent:
             return 'hours'
         elif any(re.search(pattern, user_input_lower) for pattern in menu_patterns):
             return 'menu'
+        elif any(re.search(pattern, user_input_lower) for pattern in greeting_patterns):
+            return 'greetings'
         else:
             return 'unknown'
     
@@ -64,6 +68,8 @@ class ChatBotAgent:
                 return self.research_agent.get_hours(user_input)
             elif intent == 'menu':
                 return self.research_agent.list_drinks()
+            elif intent == 'greetings':
+                return random_greetings()
             elif intent == 'unknown':
                 return random_string()
             else:
